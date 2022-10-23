@@ -33,7 +33,7 @@ export default function ForgotPassword() {
               className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
             />
 
-            <div className="flex justify-between text-sm sm:text-lg">
+            <div className="flex justify-between text-sm sm:text-lg mt-5">
               <p>
                 Don't have an account?
                 <Link
