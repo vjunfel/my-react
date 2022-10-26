@@ -1,0 +1,3 @@
+***** CLI Installation NPM Packages *****
+npm install --save-dev nodemon ---> (use for server)
+npm i express ---> (Install ExpressJS)
