@@ -4,9 +4,9 @@
 
 body{
     background-color: rgb(47, 47, 47);
+    color: white;
 }
 
 p{
-    color: white;
     line-height: 1.6rem;
 }
