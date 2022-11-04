@@ -24,7 +24,7 @@ export default function Header() {
     }
   }
   return (
-    <div className="mb-5 bg-white border-b shadow-sm lg:py-5 sticky top-0 z-10">
+    <div className="mb-5 bg-white border-b shadow-sm lg:py-5 sticky top-0 z-40">
       <header className="flex justify-between items-center px-2 max-w-6xl mx-auto ">
         <div>
           <img
@@ -37,7 +37,7 @@ export default function Header() {
         <div>
           <ul className="flex space-x-10">
             <li
-              className={`cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
+              className={`hover:border-b-orange-600 cursor-pointer py-3 text-sm font-semibold text-gray-400 border-b-[3px] border-b-transparent ${
                 pathMatchRoute("/") && "text-black border-b-orange-500"
               }`}
               onClick={() => navigate("/")}
