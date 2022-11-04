@@ -4,7 +4,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
-import { Toast } from "react-toastify";
+import { toast, Toast } from "react-toastify";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,7 +32,9 @@ export default function SignIn() {
       if (userCredential.user) {
         navigate("/");
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Error! Pls check login details");
+    }
   }
   return (
     <section>
