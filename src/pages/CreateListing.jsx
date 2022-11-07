@@ -12,8 +12,10 @@ import { getAuth } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
+  const navigate = useNavigate();
   const auth = getAuth();
   const [geolocationEnabled, setGeolocationEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -77,7 +79,7 @@ export default function CreateListing() {
   async function onSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    if (discountedPrice >= regularPrice) {
+    if (+discountedPrice >= +regularPrice) {
       setLoading(false);
       toast.error("Discounted price should be less than regular price");
       return;
@@ -163,10 +165,13 @@ export default function CreateListing() {
       timestamp: serverTimestamp(),
     };
     delete formDataCopy.images;
+    delete formDataCopy.latitude;
+    delete formDataCopy.longitude;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
     const docRef = await addDoc(collection(db, "listings"), formDataCopy);
     setLoading(false);
     toast.success("Listing created");
+    Navigate(`/category/${formDataCopy.type}/${docRef.id}`);
   }
 
   if (loading) {
