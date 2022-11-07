@@ -163,6 +163,7 @@ export default function CreateListing() {
       imgUrls,
       geolocation,
       timestamp: serverTimestamp(),
+      userRef: auth.currentUser.uid,
     };
     delete formDataCopy.images;
     delete formDataCopy.latitude;
@@ -219,7 +220,7 @@ export default function CreateListing() {
             onChange={onChange}
             placeholder="John Doe"
             maxLength="32"
-            minLength={"10"}
+            minLength={"5"}
             required
             className="w-full rounded px-5 py-2 text-lg text-gray-700 bg-white border border-gray-300 transition duration-150 ease-in-out focus:text-gray-800 focus:bg-white mb-5"
           ></input>
