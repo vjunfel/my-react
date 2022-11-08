@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { getAuth, updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import {
   collection,
@@ -75,6 +75,10 @@ export default function Profile() {
     }
     fetchUserListings();
   }, [auth.currentUser.uid]);
+  function onDelete() {}
+  function onEdit(listingID) {
+    navigate(`/edit-listing/${listingID}`);
+  }
   return (
     <>
       <section className="max-w-6xl mx-auto flex justify-center items-center flex-col">
@@ -139,16 +143,18 @@ export default function Profile() {
           </button>
         </div>
       </section>
-      <div className="max-w-6xl px-3 mt-6 mx-auto">
+      <div className="max-w-6xl mt-6 mx-auto">
         {!loading && listings.length > 0 && (
           <>
             <h2 className="text-2xl text-center font-semibold">My Listings</h2>
-            <ul className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl-grid-cols-5 mt-6 mb-6">
+            <ul className="sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl-grid-cols-5 mt-6 mb-6">
               {listings.map((listing) => (
                 <ListingItem
                   key={listing.id}
                   id={listing.id}
                   listing={listing.data}
+                  onDelete={() => onDelete(listing.id)}
+                  onEdit={() => onEdit(listing.id)}
                 />
               ))}
             </ul>

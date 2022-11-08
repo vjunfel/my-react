@@ -58,7 +58,7 @@ export default function SignIn() {
               value={email}
               onChange={onChange}
               placeholder="Email address"
-              className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out"
+              className="w-full px-4 py-2 text-xl text-gray-700 border-gray-300 rounded transition ease-in-out"
             />
             <div className="relative">
               <input
@@ -76,7 +76,7 @@ export default function SignIn() {
                 />
               ) : (
                 <FaEye
-                  className="cursor-pointer absolute right-3 top-8 text-xl"
+                  className="cursor-pointer absolute right-3 top-8 text-xl text-gray-700"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               )}
