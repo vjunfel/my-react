@@ -174,12 +174,11 @@ export default function CreateListing() {
     toast.success("Listing created");
     Navigate(`/category/${formDataCopy.type}/${docRef.id}`);
   }
-
   if (loading) {
     return <Spinner />;
   }
   return (
-    <main className="max-w-lg px-2 mx-auto">
+    <main className="max-w-lg px-2 mx-auto container">
       <h1 className="text-3xl text-center mt-6 font-bold ">Create a Listing</h1>
       <form onSubmit={onSubmit}>
         <p className="text-lg mt-6 font-semibold">Sell / Rent</p>
@@ -218,8 +217,8 @@ export default function CreateListing() {
             id="name"
             value={name}
             onChange={onChange}
-            placeholder="John Doe"
-            maxLength="32"
+            placeholder="2 Story Modern House"
+            maxLength="50"
             minLength={"8"}
             required
             className="w-full rounded px-5 py-2 text-lg text-gray-700 bg-white border border-gray-300 transition duration-150 ease-in-out focus:text-gray-800 focus:bg-white mb-5"

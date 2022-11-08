@@ -98,12 +98,12 @@ export default function SignUp() {
               />
               {showPassword ? (
                 <FaEyeSlash
-                  className="cursor-pointer absolute right-3 top-8 text-xl"
+                  className="cursor-pointer absolute right-3 top-8 text-xl text-gray-700"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               ) : (
                 <FaEye
-                  className="cursor-pointer absolute right-3 top-8 text-xl"
+                  className="cursor-pointer absolute right-3 top-8 text-xl text-gray-700"
                   onClick={() => setShowPassword((prevState) => !prevState)}
                 />
               )}
