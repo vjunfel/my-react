@@ -2,7 +2,7 @@ import React from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { MdLocationOn } from "react-icons/md";
-import { FaTrash } from "react-icons/fa";
+import { TbTrash } from "react-icons/tb";
 import { MdEdit } from "react-icons/md";
 
 export default function ListingItem({ listing, id, onEdit, onDelete }) {
@@ -23,7 +23,7 @@ export default function ListingItem({ listing, id, onEdit, onDelete }) {
         <div className="px-2">
           <div className="w-full py-[10px] ">
             <div className="flex items-center space-x-1">
-              <MdLocationOn className=" text-gray-600  text-xl" />
+              <MdLocationOn className=" text-red-700  text-xl" />
               <p className=" text-sm mb-[2px]  truncate">{listing.address}</p>
             </div>
           </div>
@@ -54,8 +54,8 @@ export default function ListingItem({ listing, id, onEdit, onDelete }) {
         </div>
       </Link>
       {onDelete && (
-        <FaTrash
-          className="flex items-center justify-center absolute bottom-3 right-3 text-sm cursor-pointer text-red-800"
+        <TbTrash
+          className="flex items-center justify-center absolute bottom-3 right-3 text-lg cursor-pointer text-gray-800"
           onClick={() => onDelete(listing.id)}
         />
       )}
