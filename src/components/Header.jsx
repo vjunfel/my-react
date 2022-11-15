@@ -24,13 +24,13 @@ export default function Header() {
     }
   }
   return (
-    <div className="mb-5 bg-white border-b shadow-sm lg:py-5 py-2 sticky top-0 z-40">
+    <div className=" bg-white border-b shadow-sm lg:py-2 py-2 sticky top-0 z-40">
       <header className="flex justify-between items-center px-2 container mx-auto ">
         <div>
           <img
-            src="https://static.rdc.moveaws.com/images/logos/rdc-logo-default.svg"
+            src="/images/HouseHub.png"
             alt="logo"
-            className="h-5 cursor-pointer"
+            className=" cursor-pointer w-36"
             onClick={() => navigate("/")}
           />
         </div>

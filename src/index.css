@@ -10,3 +10,12 @@ body{
 p{
     line-height: 1.6rem;
 }
+
+.swiper-button-next:after,
+.swiper-button-prev:after{
+    color: #006eff;
+}
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{
+    background: #006eff !important
+}
