@@ -36,13 +36,16 @@ export default function Contact({ userRef, listing }) {
               rows="3"
               value={message}
               onChange={onChange}
-              className="w-full rounded mt-1"
+              className="w-full rounded mt-1 shadow-lg bg-white text-green-700"
             ></textarea>
           </div>
           <a
             href={`mailto:${owner.email}?Subject=${listing.name} &body=${message}`}
           >
-            <button className="bg-blue-700 text-white p-3 font-semibold rounded my-3">
+            <button
+              type="button"
+              className="bg-blue-600 text-white py-3 px-5 font-semibold rounded my-3 shadow-lg hover:bg-blue-800 uppercase transition duration-150"
+            >
               Send Message
             </button>
           </a>
