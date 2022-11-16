@@ -29,7 +29,7 @@ export default function ListingItem({ listing, id, onEdit, onDelete }) {
           </div>
           <p className="font-semibold  text-xl truncate">{listing.name}</p>
           <p className="text-[#9e1b1b] font-semibold">
-            Php&nbsp;
+            &#8369;&nbsp;
             {listing.offer
               ? listing.discountedPrice
                   .toString()

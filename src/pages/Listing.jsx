@@ -12,8 +12,14 @@ import SwiperCore, {
   Pagination,
 } from "swiper";
 import "swiper/css/bundle";
-import { FaShare } from "react-icons/fa";
-import { toast } from "react-toastify";
+import {
+  FaBath,
+  FaBed,
+  FaChair,
+  FaMapMarkerAlt,
+  FaParking,
+  FaShare,
+} from "react-icons/fa";
 
 export default function Listing() {
   const params = useParams();
@@ -74,6 +80,71 @@ export default function Listing() {
           Link Copied
         </p>
       )}
+
+      <div className="m-4 flex item-center justify-center  flex-col md:flex-row max-w-6xl lg:mx-auto gap-4 rounded-lg p-4 shadow-lg bg-white">
+        <div className="text-gray-700 w-full  md-[200px]">
+          <p className="text-2xl font-bold mb-3 text-blue-900 ">
+            {listing.name}
+            <p className=" my-3">
+              &#8369;&nbsp;
+              {listing.offer
+                ? listing.discountedPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                : listing.regularPrice
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              {listing.type === "rent" ? " / month " : ""}
+            </p>
+          </p>
+          <p className="flex items-center font-semibold mt-3 ">
+            <FaMapMarkerAlt className="text-red-700 mr-1" />
+            {listing.address}
+          </p>
+
+          <div className="flex  text-white font-semibold mt-3 gap-3 w-[75%] ">
+            <p className="w-full  bg-red-800 p-3 rounded-md  text-center shadow-md">
+              {listing.type === "rent" ? "For Rent" : "Sale"}
+            </p>
+
+            <p className="w-full bg-green-800 p-3 rounded-md text-center shadow-md">
+              {listing.offer && (
+                <p>
+                  &#8369;
+                  {+listing.regularPrice - +listing.discountedPrice} Discount
+                </p>
+              )}
+            </p>
+          </div>
+
+          <p className="mt-6">
+            <span className="font-semibold">Description -</span>
+            <span> {listing.description} </span>
+          </p>
+          <ul className=" flex mt-5 whitespace-nowrap">
+            <li className="flex items-center font-semibold text-sm mr-6">
+              <FaBed className="mr-1 text-lg" />
+              {+listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
+            </li>
+            <li className="flex items-center font-semibold text-sm mr-6">
+              <FaBath className="mr-1 text-lg" />
+              {+listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : "1 Bath"}
+            </li>
+            <li className="flex items-center font-semibold text-sm mr-6">
+              <FaParking className="mr-1 text-lg" />
+              {+listing.parking ? "Parking Spot" : "No Parking"}
+            </li>
+            <li className="flex items-center font-semibold text-sm ">
+              <FaChair className="mr-1 text-lg" />
+              {listing.furnished ? "Furnished" : "Not Furnished"}
+            </li>
+          </ul>
+        </div>
+
+        <div className=" bg-gray-500 text-gray-700 w-full h-[300px] lg-[400px] overflow-hidden">
+          sdafsdf
+        </div>
+      </div>
     </main>
   );
 }
