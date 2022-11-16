@@ -12,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import CreateListing from "./pages/CreateListing";
 import EditListing from "./pages/EditListing";
 import Listing from "./pages/Listing";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           </Route>
           <Route path="/category/:categoryName/:listingId" element={<Listing/>} />
         </Routes>
+        <Footer/>
       </Router>
       <ToastContainer
         position="bottom-center"

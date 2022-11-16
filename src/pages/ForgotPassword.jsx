@@ -22,7 +22,7 @@ export default function ForgotPassword() {
     }
   }
   return (
-    <section>
+    <section className="mb-24">
       <h1 className="text-white text-3xl text-center mt-6 font-bold">
         {" "}
         Forgot Password{" "}

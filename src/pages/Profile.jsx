@@ -93,7 +93,7 @@ export default function Profile() {
   }
   return (
     <>
-      <section className="max-w-5xl mx-auto flex justify-center items-center flex-col">
+      <section className="max-w-5xl mx-auto flex justify-center items-center flex-col mb-6">
         <h1 className="text-3xl text-center my-6 font-bold text-white">
           My Profile
         </h1>
@@ -155,7 +155,7 @@ export default function Profile() {
           </button>
         </div>
       </section>
-      <div className="container mx-auto mt-6">
+      <div className="container mx-auto mt-6 mb-24">
         {!loading && listings.length > 0 && (
           <>
             <h2 className="text-2xl text-center font-semibold">My Listings</h2>

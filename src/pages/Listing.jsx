@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { getAuth } from "firebase/auth";
 import SwiperCore, {
   EffectFade,
   Autoplay,
@@ -22,10 +23,12 @@ import {
 } from "react-icons/fa";
 
 export default function Listing() {
+  const auth = getAuth();
   const params = useParams();
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [shareLinkCopied, setShareLinkCopied] = useState(false);
+  const [contactOwner, setContactOwner] = useState(false);
   SwiperCore.use([Autoplay, Navigation, Pagination]);
   useEffect(() => {
     async function fetchListing() {
@@ -42,7 +45,7 @@ export default function Listing() {
     return <Spinner />;
   }
   return (
-    <main>
+    <main className="mb-24">
       <Swiper
         slidesPerView={1}
         navigation
@@ -81,68 +84,86 @@ export default function Listing() {
         </p>
       )}
 
-      <div className="m-4 flex item-center justify-center  flex-col md:flex-row max-w-6xl lg:mx-auto gap-4 rounded-lg p-4 shadow-lg bg-white">
-        <div className="text-gray-700 w-full  md-[200px]">
-          <p className="text-2xl font-bold mb-3 text-blue-900 ">
-            {listing.name}
-            <p className=" my-3">
-              &#8369;&nbsp;
-              {listing.offer
-                ? listing.discountedPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                : listing.regularPrice
-                    .toString()
-                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-              {listing.type === "rent" ? " / month " : ""}
+      <div className="m-4 flex item-center justify-center  flex-col md:flex-row max-w-7xl lg:mx-auto gap-6 rounded-lg p-4 shadow-lg bg-white">
+        <div className="text-gray-700 w-full  md-[200px] ">
+          <div>
+            <p className="flex justify-center items-start font-semibold mb-3 ">
+              <FaMapMarkerAlt className="text-red-700 mt-1 mr-1 text-lg" />
+              {listing.address}
             </p>
-          </p>
-          <p className="flex items-center font-semibold mt-3 ">
-            <FaMapMarkerAlt className="text-red-700 mr-1" />
-            {listing.address}
-          </p>
+            <p className=" mb-3 ">
+              <span className="flex font-bold text-2xl  text-blue-900 justify-center">
+                {listing.name}
+              </span>
 
-          <div className="flex  text-white font-semibold mt-3 gap-3 w-[75%] ">
-            <p className="w-full  bg-red-800 p-3 rounded-md  text-center shadow-md">
-              {listing.type === "rent" ? "For Rent" : "Sale"}
-            </p>
-
-            <p className="w-full bg-green-800 p-3 rounded-md text-center shadow-md">
-              {listing.offer && (
-                <p>
-                  &#8369;
-                  {+listing.regularPrice - +listing.discountedPrice} Discount
+              <div className="flex justify-evenly items-center text-white font-semibold my-3 gap-3">
+                <p className=" my-3 text-red-700 font-semibold text-4xl">
+                  &#8369;&nbsp;
+                  {listing.offer
+                    ? listing.discountedPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    : listing.regularPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  {listing.type === "rent" ? " / month " : ""}
                 </p>
-              )}
+              </div>
+              <p className="w-full bg-green-800 p-2 rounded-md text-center text-white shadow-md ">
+                {listing.offer ? (
+                  <span>
+                    <p className="line-through">
+                      &#8369;
+                      {listing.regularPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </p>
+                  </span>
+                ) : (
+                  <span className="line-through">No Promo</span>
+                )}
+              </p>
             </p>
           </div>
+
+          <p className=" mt-3 bg-red-800 p-2 px-6 rounded-md text-white font-semibold text-center shadow-md">
+            {listing.type === "rent" ? "For Rent" : "For Sale"}
+          </p>
 
           <p className="mt-6">
             <span className="font-semibold">Description -</span>
             <span> {listing.description} </span>
           </p>
-          <ul className=" flex mt-5 whitespace-nowrap">
-            <li className="flex items-center font-semibold text-sm mr-6">
+          <ul className=" flex mt-3 flex-col sm:flex-row">
+            <li className="flex items-center font-semibold text-sm mr-6 whitespace-nowrap">
               <FaBed className="mr-1 text-lg" />
               {+listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
             </li>
-            <li className="flex items-center font-semibold text-sm mr-6">
+            <li className="flex items-center font-semibold text-sm mr-6 whitespace-nowrap">
               <FaBath className="mr-1 text-lg" />
               {+listing.bathrooms > 1 ? `${listing.bathrooms} Baths` : "1 Bath"}
             </li>
-            <li className="flex items-center font-semibold text-sm mr-6">
+            <li className="flex items-center font-semibold text-sm mr-6 whitespace-nowrap">
               <FaParking className="mr-1 text-lg" />
-              {+listing.parking ? "Parking Spot" : "No Parking"}
+              {+listing.parking ? "Park Spot" : "No Parking"}
             </li>
-            <li className="flex items-center font-semibold text-sm ">
+            <li className="flex items-center font-semibold text-sm whitespace-nowrap">
               <FaChair className="mr-1 text-lg" />
               {listing.furnished ? "Furnished" : "Not Furnished"}
             </li>
           </ul>
+          {listing.userRef !== auth.currentUser?.uid && !contactOwner && (
+            <button
+              onClick={() => setContactOwner(true)}
+              className="w-full my-8 p-5 bg-blue-600 rounded text-white font-semibold uppercase shadow-lg hover:bg-blue-700 transition duration-150"
+            >
+              Contact The Owner / Representative
+            </button>
+          )}
         </div>
 
         <div className=" bg-gray-500 text-gray-700 w-full h-[300px] lg-[400px] overflow-hidden">
-          sdafsdf
+          Map Here
         </div>
       </div>
     </main>
