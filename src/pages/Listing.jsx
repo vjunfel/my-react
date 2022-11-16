@@ -22,6 +22,7 @@ import {
   FaShare,
 } from "react-icons/fa";
 import Contact from "../components/Contact";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 export default function Listing() {
   const auth = getAuth();
@@ -46,7 +47,7 @@ export default function Listing() {
     return <Spinner />;
   }
   return (
-    <main className="mb-24">
+    <main className="mb-36">
       <Swiper
         slidesPerView={1}
         navigation
@@ -135,7 +136,7 @@ export default function Listing() {
             <span className="font-semibold">Description -</span>
             <span> {listing.description} </span>
           </p>
-          <ul className=" flex mt-3 flex-col sm:flex-row">
+          <ul className=" flex mt-3 flex-col sm:flex-row gap-1">
             <li className="flex items-center font-semibold text-sm mr-6 whitespace-nowrap">
               <FaBed className="mr-1 text-lg" />
               {+listing.bedrooms > 1 ? `${listing.bedrooms} Beds` : "1 Bed"}
@@ -166,8 +167,27 @@ export default function Listing() {
           )}
         </div>
 
-        <div className=" bg-gray-500 text-gray-700 w-full h-[300px] lg-[400px] overflow-hidden">
-          Map Here
+        <div className=" bg-gray-500 text-gray-800 w-full h-[400px] lg-[400px] overflow-hidden">
+          <MapContainer
+            center={[listing.geolocation.lat, listing.geolocation.lng]}
+            zoom={13}
+            scrollWheelZoom={false}
+            style={{ height: "100%", width: "100%" }}
+            className="z-0"
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker
+              position={[listing.geolocation.lat, listing.geolocation.lng]}
+            >
+              <Popup>
+                {listing.name} <br />
+                {listing.address}
+              </Popup>
+            </Marker>
+          </MapContainer>
         </div>
       </div>
     </main>

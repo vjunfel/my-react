@@ -217,7 +217,7 @@ export default function CreateListing() {
             id="name"
             value={name}
             onChange={onChange}
-            placeholder="2 Story Modern House"
+            placeholder=""
             maxLength="50"
             minLength={"8"}
             required
@@ -311,7 +311,7 @@ export default function CreateListing() {
             id="address"
             value={address}
             onChange={onChange}
-            placeholder="Rizal Street, Cebu City, Philippines"
+            placeholder=""
             required
             className="w-full rounded px-5 py-2 text-lg text-gray-700 bg-white border border-gray-300 transition duration-150 ease-in-out focus:text-gray-800 focus:bg-white mb-5"
           />
@@ -325,8 +325,8 @@ export default function CreateListing() {
                   value={longitude}
                   onChange={onChange}
                   required
-                  min="-90"
-                  max="90"
+                  min="-190"
+                  max="190"
                   className="w-full mb-5 px-5 py-2 text-xl text-gray-700 bg-white border border-gray-300 rounded transition duration-150 ease-in-out focus:bg-white focus:text-gray-700 text-center"
                 />
               </div>
