@@ -21,6 +21,7 @@ import {
   FaParking,
   FaShare,
 } from "react-icons/fa";
+import Contact from "../components/Contact";
 
 export default function Listing() {
   const auth = getAuth();
@@ -159,6 +160,9 @@ export default function Listing() {
             >
               Contact The Owner / Representative
             </button>
+          )}
+          {contactOwner && (
+            <Contact userRef={listing.userRef} listing={listing} />
           )}
         </div>
 
