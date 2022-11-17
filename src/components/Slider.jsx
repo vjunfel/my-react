@@ -64,8 +64,24 @@ export default function Slider() {
                   background: `url(${data.imgUrls[0]}) center, no-repeat`,
                   backgroundSize: "cover",
                 }}
-                className="w-full h-[400px] overflow-hidden"
-              ></div>
+                className="w-full h-[400px] overflow-hidden relative"
+              >
+                <p className="text-white absolute left-0 bottom-5 font-medium bg-slate-800 py-3 px-12 shadow-lg opacity-90">
+                  {data.name}
+                </p>
+                <span className="text-white absolute left-0 top-10 font-medium bg-red-700 py-3 px-5 shadow-lg opacity-90 uppercase">
+                  &#8369;
+                  {/* {data.discountedPrice ?? data.regularPrice} */}
+                  {data.offer
+                    ? data.discountedPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    : data.regularPrice
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  {data.type === "rent" && " / month"}
+                </span>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
