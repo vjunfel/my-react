@@ -78,6 +78,37 @@ export default function Home() {
     fetchListing();
   }, []);
 
+  // Places for Sale
+  const [saleLists, setSaleLists] = useState(null);
+  useEffect(() => {
+    async function fetchListing() {
+      try {
+        // Get reference
+        const listingsRef = collection(db, "listings");
+        // Create the query
+        const q = query(
+          listingsRef,
+          where("offer", "==", true),
+          orderBy("timestamp", "desc"),
+          limit(5)
+        );
+        // Execute the query
+        const querySnap = await getDocs(q);
+        const listings = [];
+        querySnap.forEach((doc) => {
+          return listings.push({
+            id: doc.id,
+            data: doc.data(),
+          });
+        });
+        setSaleLists(listings);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchListing();
+  }, []);
+
   return (
     <div>
       <Slider />
@@ -125,8 +156,29 @@ export default function Home() {
             </ul>
           </div>
         )}
-      </div>
 
+        {saleLists && saleLists.length > 0 && (
+          <div className="  mx-10">
+            <h2 className="px-3 py-0 text-2xl mt-5 font-semibold">
+              Places for sale
+            </h2>
+            <Link to="/category/sale">
+              <p className="px-3 py-2 text-sm text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out">
+                Show more places for sale
+              </p>
+            </Link>
+            <ul className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+              {saleLists.map((listing) => (
+                <ListingItem
+                  key={listing.id}
+                  listing={listing.data}
+                  id={listing.id}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
       <Footer />
     </div>
   );
