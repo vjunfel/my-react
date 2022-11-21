@@ -47,7 +47,7 @@ export default function Listing() {
     return <Spinner />;
   }
   return (
-    <main className="mb-36">
+    <main>
       <Swiper
         slidesPerView={1}
         navigation
