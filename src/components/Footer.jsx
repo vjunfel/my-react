@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <div className="flex fixed w-full text-sm items-center sm:flex-row flex-col justify-around bg-slate-900  py-6 bottom-0 right-0 left-0 z-10">
       <p className="flex whitespace-nowrap">
-        Copyright {`${currentYear.getFullYear()}`}&nbsp;TheHouseHub
+        Copyright &copy; {`${currentYear.getFullYear()}`}&nbsp;TheHouseHub
       </p>
       <p className="flex whitespace-nowrap justify-center text-center">
         &nbsp;Design by: Junfel
