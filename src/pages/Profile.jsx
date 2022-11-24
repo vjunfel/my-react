@@ -16,6 +16,7 @@ import { db } from "../firebase";
 import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
+import Footer from "../components/Footer";
 
 export default function Profile() {
   const [listings, setListings] = useState(null);
@@ -173,6 +174,7 @@ export default function Profile() {
           </>
         )}
       </div>
+      <Footer />
     </>
   );
 }
