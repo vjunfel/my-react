@@ -10,23 +10,25 @@ import {
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import ListingItem from "../components/ListingItem";
 import Spinner from "../components/Spinner";
 import { db } from "../firebase";
 
-export default function Offers() {
+export default function Category() {
   const [listings, setListings] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastFetchedListing, setLastFetchedListing] = useState(null);
+  const params = useParams();
   useEffect(() => {
     async function fetchListings() {
       try {
         const listingRef = collection(db, "listings");
         const q = query(
           listingRef,
-          where("offer", "==", true),
+          where("type", "==", params.categoryName),
           orderBy("timestamp", "desc"),
           limit(10)
         );
@@ -47,13 +49,13 @@ export default function Offers() {
       }
     }
     fetchListings();
-  }, []);
+  }, [params.categoryName]);
   async function onFetchMoreListings() {
     try {
       const listingRef = collection(db, "listings");
       const q = query(
         listingRef,
-        where("offer", "==", true),
+        where("type", "==", params.categoryName),
         orderBy("timestamp", "desc"),
         startAfter(lastFetchedListing),
         limit(5)
@@ -76,7 +78,9 @@ export default function Offers() {
   }
   return (
     <div className="w-full px-3 py-3">
-      <h1 className="text-center text-3xl font-bold py-3">Offers</h1>
+      <h1 className="text-center text-3xl font-bold py-3">
+        {params.categoryName === "rent" ? "Places for Rent" : "Places for Sale"}
+      </h1>
 
       {loading ? (
         <Spinner />
@@ -105,7 +109,9 @@ export default function Offers() {
           </main>
         </>
       ) : (
-        <p className="mb-24"> There are no current offers yet! </p>
+        <p className="container m-auto mt-6 flex justify-center items-center h-[300px] font-semibold text-2xl mb-24 border rounded">
+          There are no current offers available just yet!
+        </p>
       )}
 
       <Footer />

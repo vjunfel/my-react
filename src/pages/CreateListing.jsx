@@ -186,7 +186,7 @@ export default function CreateListing() {
           <button
             type="button"
             id="type"
-            value="sell"
+            value="sale"
             onClick={onChange}
             className={`px-5 py-3 rounded font-medium text-sm uppercase shadow-md hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
               type === "rent"
@@ -202,7 +202,7 @@ export default function CreateListing() {
             value="rent"
             onClick={onChange}
             className={`px-5 py-2 rounded font-medium text-sm uppercase shadow-md hover:shadow-lg focus:shadow-lg active:shadow-lg transition duration-150 ease-in-out w-full ${
-              type === "sell"
+              type === "sale"
                 ? "bg-white text-blue-900 font-bold"
                 : "bg-slate-600"
             }`}
