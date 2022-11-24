@@ -110,7 +110,11 @@ export default function Category() {
         </>
       ) : (
         <p className="container m-auto mt-6 flex justify-center items-center h-[300px] font-semibold text-2xl mb-24 border rounded">
-          There are no current offers available just yet!
+          There are no current{" "}
+          {params.categoryName === "rent"
+            ? "places for rent"
+            : "places for sale"}{" "}
+          available just yet!
         </p>
       )}
 
