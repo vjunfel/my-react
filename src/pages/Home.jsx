@@ -88,7 +88,7 @@ export default function Home() {
         // Create the query
         const q = query(
           listingsRef,
-          where("offer", "==", true),
+          where("type", "==", "sale"),
           orderBy("timestamp", "desc"),
           limit(5)
         );
