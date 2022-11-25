@@ -112,9 +112,9 @@ export default function Home() {
   return (
     <div>
       <Slider />
-      <div className="mt-6 mb-36 sm:mb-24">
+      <div className="mt-6 mb-36 sm:mb-24 container mx-auto">
         {offerLists && offerLists.length > 0 && (
-          <div className="mb-6 mx-10">
+          <div className="mb-6">
             <h2 className="px-3 py-0 text-2xl mt-5 font-semibold">
               Recent offers
             </h2>
@@ -134,9 +134,8 @@ export default function Home() {
             </ul>
           </div>
         )}
-
         {rentLists && rentLists.length > 0 && (
-          <div className="  mx-10">
+          <div>
             <h2 className="px-3 py-0 text-2xl mt-5 font-semibold">
               Places for rent
             </h2>
@@ -158,7 +157,7 @@ export default function Home() {
         )}
 
         {saleLists && saleLists.length > 0 && (
-          <div className="  mx-10">
+          <div>
             <h2 className="px-3 py-0 text-2xl mt-5 font-semibold">
               Places for sale
             </h2>
@@ -179,6 +178,7 @@ export default function Home() {
           </div>
         )}
       </div>
+
       <Footer />
     </div>
   );
